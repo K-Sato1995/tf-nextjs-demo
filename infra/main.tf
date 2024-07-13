@@ -15,3 +15,14 @@ resource "vercel_project" "tf-nextjs-demo" {
     repo = "K-Sato1995/tf-nextjs-demo"
   }
 }
+
+data "vercel_project_directory" "nextjs-blog" {
+  path = "../nextjs-blog"
+}
+
+resource "vercel_deployment" "tf-nextjs-demo_deployment" {
+  project_id  = vercel_project.tf-nextjs-demo.id
+  files       = data.vercel_project_directory.nextjs-blog.files
+  path_prefix = "../nextjs-blog"
+  production  = true
+}
