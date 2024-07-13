@@ -2,7 +2,7 @@ terraform {
   required_providers {
     vercel = {
       source = "vercel/vercel"
-      version = "~> 0.3"
+      version = "~> 1.0"
     }
   }
 }
@@ -25,4 +25,9 @@ resource "vercel_deployment" "tf-nextjs-demo_deployment" {
   files       = data.vercel_project_directory.nextjs-blog.files
   path_prefix = "../nextjs-blog"
   production  = true
+}
+
+resource "vercel_attack_challenge_mode" "tf-nextjs-demo_attack_challenge_mode" {
+  project_id = vercel_project.tf-nextjs-demo.id
+  enabled    = true
 }
